@@ -1,0 +1,150 @@
+// Variables
+$primary-color: #3897f0; // Azul de Instagram
+$text-color: #262626;
+$placeholder-color: #8e8e8e;
+$border-color: #dbdbdb;
+$background-color: #fafafa; // Fondo ligero
+$button-disabled-color: rgba($primary-color, 0.5);
+
+// ===============================================
+// ESTILOS DE PÁGINA DE LOGIN (.login-page)
+// ===============================================
+
+.login-page {
+  --background: #{$background-color}; 
+}
+
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+}
+
+.login-container {
+  width: 90%;
+  max-width: 350px;
+  padding: 40px 20px;
+  background: white;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  text-align: center;
+}
+
+// --- Títulos (Login) ---
+.login-container .title {
+  font-family: 'Billabong', cursive;
+  font-size: 52px;
+  margin-bottom: 20px;
+  color: $text-color;
+  font-weight: normal;
+}
+
+.login-container .subtitle {
+  color: $placeholder-color;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+// --- Formulario y Entradas (Inputs) ---
+.login-form {
+  margin-top: 20px;
+
+  ion-item {
+    margin-bottom: 8px;
+    --min-height: 44px;
+
+    ion-input {
+      font-size: 14px;
+      --background: #fafafa;
+      --padding-start: 10px;
+      border: 1px solid $border-color;
+      border-radius: 3px;
+    }
+  }
+}
+
+// --- Botón de Inicio de Sesión (Login) ---
+.login-container ion-button {
+  margin-top: 15px;
+  --background: #{$primary-color};
+  --background-activated: darken($primary-color, 10%);
+  --border-radius: 5px;
+  text-transform: capitalize;
+  font-weight: bold;
+  height: 44px;
+
+  &[disabled] {
+    opacity: 0.7;
+    --background: #{$button-disabled-color};
+  }
+}
+
+// --- Enlace de Registro ---
+.register {
+  margin-top: 20px;
+  font-size: 14px;
+  color: $text-color;
+
+  a {
+    color: $primary-color;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+  }
+}
+
+// --- Media Query para Escritorio (Login) ---
+@media (min-width: 600px) {
+  .login-wrapper {
+    min-height: calc(100vh - var(--ion-safe-area-bottom, 0));
+  }
+  
+  .login-container {
+    padding: 30px;
+  }
+}
+
+
+// ===============================================
+// ESTILOS DE PÁGINA DE INICIO (.page-home) - CORREGIDOS
+// ===============================================
+
+.page-home {
+  // Flexbox para centrar el contenido (horizontal y vertical) en toda la pantalla
+  --display: flex;
+  --justify-content: center;
+  --align-items: center;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+.welcome-container {
+  // Contenedor del contenido principal
+  max-width: 300px; 
+  width: 90%;
+  text-align: center;
+  padding: 20px;
+}
+
+// --- Títulos (Home) ---
+.welcome-container .title {
+  font-family: 'Billabong', cursive;
+  font-size: 52px;
+  color: #262626;
+  margin-bottom: 20px;
+}
+
+.welcome-container .subtitle {
+  color: #8e8e8e;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+// --- Botón (Home) ---
+.welcome-container ion-button {
+  margin-top: 30px;
+  --border-radius: 5px; 
+  height: 48px;
+  font-weight: bold;
+}

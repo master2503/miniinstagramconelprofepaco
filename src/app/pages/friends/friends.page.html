@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Amigos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="loadData()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngIf="!loading">
+
+    <ion-item-divider color="light">
+      <ion-label>Solicitudes pendientes</ion-label>
+    </ion-item-divider>
+
+    <ion-item *ngFor="let p of pending">
+      <ion-avatar slot="start">
+        <ion-img [src]="p.user?.avatar || 'assets/icon/favicon.png'"></ion-img>
+      </ion-avatar>
+      <ion-label>
+        {{ p.user?.name }}
+      </ion-label>
+      <ion-button fill="outline" (click)="accept(p.id)">
+        Aceptar
+      </ion-button>
+    </ion-item>
+
+    <ion-item-divider color="light" *ngIf="pending.length > 0">
+      <ion-label></ion-label>
+    </ion-item-divider>
+
+    <ion-item-divider color="light">
+      <ion-label>Amigos</ion-label>
+    </ion-item-divider>
+
+    <ion-item *ngFor="let f of friends">
+      <ion-avatar slot="start">
+        <ion-img [src]="f.avatar || 'assets/icon/favicon.png'"></ion-img>
+      </ion-avatar>
+      <ion-label>
+        {{ f.name }}
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-spinner *ngIf="loading" class="spinner-center"></ion-spinner>
+
+</ion-content>

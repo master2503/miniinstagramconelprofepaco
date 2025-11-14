@@ -1,0 +1,39 @@
+.feed-container {
+  padding: 10px;
+}
+
+.post-card {
+  margin-bottom: 20px;
+}
+
+.post-image {
+  width: 100%;
+  height: auto;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+.post-actions {
+  padding: 8px 12px;
+  align-items: center;
+
+  .like-icon {
+    font-size: 28px;
+    color: #25008b;
+    cursor: pointer;
+  }
+}
+
+.likes-text {
+  font-weight: bold;
+  padding: 0 12px;
+}
+
+.caption {
+  padding: 0 12px 12px 12px;
+  color: #828282;
+}

@@ -1,0 +1,7 @@
+{
+  "name": "miniInstaagram",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

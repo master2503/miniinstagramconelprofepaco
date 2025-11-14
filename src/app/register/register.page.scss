@@ -1,0 +1,82 @@
+// --- Variables (Asegúrate de que coincidan con tu tema) ---
+$primary-blue: #1a73e8;
+$accent-red: #ea4335;
+$text-color: #262626;
+$placeholder-color: #757575;
+$border-color: #c0c0c0;
+$background-color: #f7f7f7;
+
+.register-page {
+  --background: #{$background-color};
+}
+
+.register-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+}
+
+.register-container {
+  width: 90%;
+  max-width: 380px; // Un poco más ancho para el formulario de registro
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
+  padding: 30px 20px;
+  background: white;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  text-align: center;
+}
+
+// --- Títulos ---
+.title {
+  font-family: 'Billabong', cursive;
+  font-size: 52px;
+  margin-bottom: 10px;
+  color: $primary-blue;
+  font-weight: normal;
+}
+
+.subtitle {
+  color: $placeholder-color;
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+// --- Formulario ---
+form {
+  ion-item {
+    margin-bottom: 8px; // Espacio entre inputs
+    --min-height: 48px;
+    border-radius: 4px;
+    
+    ion-input {
+      font-size: 14px;
+      --background: #ffffff;
+      --padding-start: 12px;
+      border: 1px solid $border-color;
+      border-radius: 4px;
+    }
+  }
+  
+  // --- Mensajes de Error ---
+  .error-message {
+    text-align: left;
+    padding-left: 10px;
+    margin-bottom: 8px;
+    small {
+      color: $accent-red; // Color rojo para errores
+      font-size: 12px;
+    }
+  }
+
+  ion-button {
+    margin-top: 20px;
+    --background: #{$primary-blue};
+    --border-radius: 8px; 
+    text-transform: uppercase;
+    font-weight: 700;
+    height: 50px; 
+    box-shadow: 0 6px 15px rgba($primary-blue, 0.4);
+  }
+}

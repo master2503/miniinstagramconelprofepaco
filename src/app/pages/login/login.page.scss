@@ -1,0 +1,185 @@
+/**
+ * Estilos unificados (Login y Home) con paleta Rojo y Azul y profundidad
+ * CORRECCIÓN: Colores de texto restaurados para visibilidad.
+ */
+
+// --- Variables de Color (Corregidas) ---
+$primary-blue: #1a73e8;     // Azul Vibrante (Usado en botones)
+$accent-red: #ea4335;       // Rojo Intenso (Usado en enlaces de acento)
+$text-color: #262626;       // << CORREGIDO: Texto oscuro para ser visible sobre fondo blanco
+$placeholder-color: #757575; // << CORREGIDO: Gris para subtítulos y placeholders
+$border-color: #c0c0c0;     // Borde más definido
+$background-color: #f7f7f7; // Fondo muy ligero
+
+// ===============================================
+// ESTILOS DE PÁGINA DE LOGIN (.login-page)
+// ===============================================
+
+.login-page {
+  --background: #{$background-color}; 
+}
+
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+}
+
+.login-container {
+  width: 90%;
+  max-width: 350px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
+  padding: 40px 20px;
+  background: white; // <-- Fondo blanco
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  text-align: center;
+}
+
+// --- Títulos (Login) ---
+.login-container .title {
+  font-family: 'Billabong', cursive;
+  font-size: 52px;
+  margin-bottom: 20px;
+  color: $primary-blue; 
+  font-weight: normal;
+}
+
+.login-container .subtitle {
+  color: $placeholder-color; // <-- Ahora es gris, visible sobre blanco
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+// --- Formulario y Entradas (Inputs) ---
+.login-form {
+  margin-top: 20px;
+
+  ion-item {
+    margin-bottom: 12px;
+    --min-height: 48px;
+    border-radius: 4px;
+
+    ion-input {
+      font-size: 14px;
+      --background: #ffffff; // <-- Fondo de input blanco
+      --padding-start: 12px;
+      border: 1px solid $border-color;
+      border-radius: 4px;
+      
+      // --- CORRECCIÓN ADICIONAL ---
+      // Forzar el color del texto y del placeholder en el input
+      --color: #{$text-color};
+      --placeholder-color: #{$placeholder-color};
+      --placeholder-opacity: 1;
+      // --- FIN DE CORRECIÓN ---
+      
+      &:focus, &:active {
+        border-color: $primary-blue;
+      }
+    }
+  }
+}
+
+// --- Botón de Inicio de Sesión (Login) ---
+.login-container ion-button {
+  margin-top: 20px;
+  --background: #{$primary-blue};
+  --background-activated: darken($primary-blue, 15%);
+  --border-radius: 8px; 
+  text-transform: uppercase;
+  font-weight: 700;
+  height: 50px; 
+  box-shadow: 0 6px 15px rgba($primary-blue, 0.4); 
+
+  &[disabled] {
+    opacity: 0.6;
+    box-shadow: none;
+  }
+}
+
+// --- Enlace de Registro ---
+.register {
+  margin-top: 25px;
+  font-size: 14px;
+  color: $text-color; // <-- Ahora es oscuro, visible sobre blanco
+
+  a {
+    color: $accent-red; 
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 5px;
+  }
+}
+
+// --- Media Query para Escritorio (Login) ---
+@media (min-width: 600px) {
+  .login-wrapper {
+    min-height: calc(100vh - var(--ion-safe-area-bottom, 0));
+  }
+  
+  .login-container {
+    padding: 30px;
+  }
+}
+
+
+// ===============================================
+// ESTILOS DE PÁGINA DE INICIO (.page-home) - CENTRADO Y VIBRANTE
+// ===============================================
+
+.page-home {
+  --display: flex;
+  --justify-content: center;
+  --align-items: center;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --background: #{$background-color}; 
+}
+
+.welcome-container {
+  max-width: 500px; 
+  width: 90%;
+  text-align: center;
+  padding: 40px;
+}
+
+// --- Títulos (Home) ---
+.welcome-container .title {
+  font-family: 'Billabong', cursive;
+  font-size: 64px; 
+  color: $primary-blue;
+  margin-bottom: 20px;
+}
+
+.welcome-container .subtitle {
+  color: $placeholder-color; // <-- Ahora es gris
+  font-size: 18px;
+  margin-top: 15px;
+  font-weight: 500;
+}
+
+// --- Botón (Home) ---
+.welcome-container ion-button {
+  margin-top: 40px;
+  --background: #{$primary-blue};
+  --border-radius: 8px; 
+  height: 55px; 
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 0 8px 20px rgba($primary-blue, 0.5);
+}
+// --- Enlace de Registro (Desde app-styles-vibrant-fixed.scss) ---
+.register {
+  margin-top: 25px;
+  font-size: 14px;
+  color: $text-color; // Color de texto oscuro
+
+  a {
+    color: $accent-red; // Color rojo para el enlace
+    text-decoration: none;
+    font-weight: 700; // Negrita
+    margin-left: 5px;
+  }
+}

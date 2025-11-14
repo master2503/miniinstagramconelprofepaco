@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Publicaciones</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="openUploadOptions()" aria-label="Subir foto">
+        <ion-icon slot="icon-only" name="camera"></ion-icon>
+      </ion-button>
+
+      <ion-button routerLink="/friends" aria-label="Amigos">
+         <ion-icon slot="icon-only" name="people"></ion-icon>
+      </ion-button>
+
+
+      <ion-button (click)="logout()" aria-label="Cerrar sesión">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+
+  <!-- Hidden file input -->
+  <input
+    #fileInput
+    type="file"
+    accept="image/*"
+    hidden
+    (change)="onFileSelected($event)"
+  />
+
+  <ion-refresher slot="fixed" (ionRefresh)="loadPosts()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="feed-container">
+    <ion-card *ngFor="let p of posts" class="post-card">
+      
+      <!-- Header del post -->
+      <ion-item lines="none">
+   |
+        <ion-label>
+          <h2>{{ p.user?.name || 'Usuario' }}</h2>
+        </ion-label>
+      </ion-item>
+      <!-- Imagen -->
+      <div class="post-image">
+       <ion-img [src]="imgUrl(p.image_url)"></ion-img>
+      </div>
+
+      <!-- Acciones -->
+      <ion-row class="post-actions">
+        <ion-col size="auto">
+          <ion-icon
+            [name]="p._liked ? 'heart' : 'heart-outline'"
+            class="like-icon"
+            (click)="toggleLike(p)">
+          </ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <!-- Likes -->
+      <div class="likes-text">
+        {{ p.likes }} me gusta
+      </div>
+
+      <!-- Caption -->
+      <div class="caption">
+        {{ p.caption }}
+      </div>
+    </ion-card>
+  </div>
+
+</ion-content>

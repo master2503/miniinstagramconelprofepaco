@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Crear Cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding register-page">
+  <div class="register-wrapper">
+    <div class="register-container">
+      
+      <h1 class="title">MiniInstagram</h1>
+      <p class="subtitle">Regístrate para continuar</p>
+
+      <!-- Formulario Reactivo -->
+      <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+        
+        <!-- Campo: Nombre -->
+        <ion-item lines="none">
+          <ion-label position="floating">Nombre Completo</ion-label>
+          <ion-input formControlName="name" type="text" fill="solid"></ion-input>
+        </ion-item>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message">
+          <small *ngIf="name.errors?.['required']">El nombre es requerido.</small>
+          <small *ngIf="name.errors?.['minlength']">Mínimo 3 caracteres.</small>
+        </div>
+        
+        <!-- Campo: Nombre de Usuario -->
+        <ion-item lines="none">
+          <ion-label position="floating">Nombre de Usuario</ion-label>
+          <ion-input formControlName="username" type="text" fill="solid"></ion-input>
+        </ion-item>
+         <div *ngIf="username.invalid && (username.dirty || username.touched)" class="error-message">
+          <small *ngIf="username.errors?.['required']">El usuario es requerido.</small>
+          <small *ngIf="username.errors?.['minlength']">Mínimo 4 caracteres.</small>
+        </div>
+
+        <!-- Campo: Email -->
+        <ion-item lines="none">
+          <ion-label position="floating">Correo Electrónico</ion-label>
+          <ion-input formControlName="email" type="email" fill="solid"></ion-input>
+        </ion-item>
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+          <small *ngIf="email.errors?.['required']">El correo es requerido.</small>
+          <small *ngIf="email.errors?.['email']">Debe ser un correo válido.</small>
+        </div>
+
+        <!-- Campo: Contraseña -->
+        <ion-item lines="none">
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input formControlName="password" type="password" fill="solid"></ion-input>
+        </ion-item>
+         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error-message">
+          <small *ngIf="password.errors?.['required']">La contraseña es requerida.</small>
+          <small *ngIf="password.errors?.['minlength']">Mínimo 6 caracteres.</small>
+        </div>
+
+        <!-- Botón de Envío -->
+        <ion-button 
+          class="ion-margin-top" 
+          type="submit" 
+          expand="block" 
+          shape="round"
+          [disabled]="registerForm.invalid">
+          Registrarse
+        </ion-button>
+        
+      </form>
+      
+    </div>
+  </div>
+</ion-content>
