@@ -3,14 +3,13 @@
     <ion-title>Publicaciones</ion-title>
 
     <ion-buttons slot="end">
-      <ion-button (click)="openUploadOptions()" aria-label="Subir foto">
+      <ion-button id="upload-button" aria-label="Subir foto">
         <ion-icon slot="icon-only" name="camera"></ion-icon>
       </ion-button>
 
       <ion-button routerLink="/friends" aria-label="Amigos">
          <ion-icon slot="icon-only" name="people"></ion-icon>
       </ion-button>
-
 
       <ion-button (click)="logout()" aria-label="Cerrar sesión">
         <ion-icon slot="icon-only" name="log-out"></ion-icon>
@@ -30,23 +29,44 @@
     (change)="onFileSelected($event)"
   />
 
-  <ion-refresher slot="fixed" (ionRefresh)="loadPosts()">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
+  <!-- Popover para upload -->
+  <ion-popover trigger="upload-button" side="bottom">
+    <ng-template>
+      <ion-content>
+        <ion-list lines="none">
+          <ion-item button (click)="captureFromCamera()">
+            <ion-icon slot="start" name="camera"></ion-icon>
+            <ion-label>Tomar foto</ion-label>
+          </ion-item>
+          <ion-item button (click)="triggerFileInput()">
+            <ion-icon slot="start" name="images"></ion-icon>
+            <ion-label>Elegir desde galería</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-popover>
 
   <div class="feed-container">
     <ion-card *ngFor="let p of posts" class="post-card">
       
       <!-- Header del post -->
       <ion-item lines="none">
-   |
+        <!-- Se eliminó el carácter '|' que estaba aquí por error -->
         <ion-label>
           <h2>{{ p.user?.name || 'Usuario' }}</h2>
         </ion-label>
       </ion-item>
+
       <!-- Imagen -->
-      <div class="post-image">
-       <ion-img [src]="imgUrl(p.image_url)"></ion-img>
+      <div class="post-image" [title]="p.user?.name + ' photo'">
+        <!-- Usamos imgUrl para asegurar que siempre haya una imagen (fallback) -->
+        <img 
+          [src]="imgUrl(p.image_url)" 
+          (error)="$event.target.src = $event.target.src.replace('/posts/', '/storage/posts/')"
+          [alt]="p.user?.name + ' photo'" 
+          role="img"
+        />
       </div>
 
       <!-- Acciones -->
@@ -58,6 +78,13 @@
             (click)="toggleLike(p)">
           </ion-icon>
         </ion-col>
+        <ion-col size="auto">
+          <ion-icon
+            name="chatbubble-outline"
+            class="like-icon"
+            (click)="toggleComments(p.id)">
+          </ion-icon>
+        </ion-col>
       </ion-row>
 
       <!-- Likes -->
@@ -65,10 +92,53 @@
         {{ p.likes }} me gusta
       </div>
 
-      <!-- Caption -->
+      <!-- Caption mejorado con nombre de usuario -->
       <div class="caption">
-        {{ p.caption }}
+        <span class="username">{{ p.user?.name || 'Usuario' }}</span>
+        <span class="text">{{ p.caption }}</span>
       </div>
+
+      <!-- Sección de Comentarios (expandible) -->
+      <div *ngIf="selectedPostId === p.id" class="comments-section">
+        <!-- Comentarios existentes -->
+        <div class="comments-list">
+          <div *ngIf="!p.comments || p.comments.length === 0" class="no-comments">
+            Sin comentarios aún. ¡Sé el primero!
+          </div>
+          <div *ngFor="let comment of p.comments" class="comment-item">
+            <strong>{{ comment.user?.name || 'Usuario' }}:</strong>
+            {{ comment.content }}
+          </div>
+        </div>
+
+        <!-- Formulario para agregar comentario -->
+        <div class="comment-form">
+          <ion-item lines="none">
+            <ion-input
+              [(ngModel)]="commentText"
+              placeholder="Escribe un comentario..."
+              (keyup.enter)="submitComment(p)">
+            </ion-input>
+            <ion-button
+              fill="clear"
+              slot="end"
+              (click)="submitComment(p)"
+              [disabled]="!commentText.trim()">
+              Enviar
+            </ion-button>
+          </ion-item>
+        </div>
+      </div>
+
+      <!-- Botón para eliminar publicación -->
+      <ion-button
+        color="danger"
+        fill="outline"
+        (click)="deletePost(p.id)"
+        aria-label="Eliminar publicación">
+        <ion-icon slot="start" name="trash"></ion-icon>
+        Eliminar
+      </ion-button>
     </ion-card>
   </div>
 

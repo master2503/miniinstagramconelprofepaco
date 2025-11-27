@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl; // Corregido para evitar errores
 
   constructor(private http: HttpClient) {}
 
@@ -65,7 +65,15 @@ export class ApiService {
 
   likePost(postId: string | number): Observable<any> {
     const headers = this.authHeaders();
-    return this.http.post(`${this.apiUrl}/posts/${postId}/like`, {}, { headers });
+    const url = `${this.apiUrl}/posts/${postId}/like`;
+    console.log('URL para dar like:', url);
+    console.log('Token enviado:', localStorage.getItem('token'));
+
+    return this.http.post(url, {}, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
   }
 
   unlikePost(postId: string | number): Observable<any> {
@@ -97,26 +105,54 @@ export class ApiService {
 
   sendFriendRequest(userId: string | number): Observable<any> {
     const headers = this.authHeaders();
-    return this.http.post(`${this.apiUrl}/users/${userId}/friend`, {}, { headers });
+    const url = `${this.apiUrl}/users/${userId}/friend`;
+    console.log('URL para enviar solicitud de amistad:', url);
+    console.log('Token enviado:', localStorage.getItem('token'));
+
+    return this.http.post(url, {}, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
   }
 
   listFriends(): Observable<any> {
     const headers = this.authHeaders();
-    return this.http.get(`${this.apiUrl}/friends`, { headers });
+    const url = `${this.apiUrl}/friends`;
+    console.log('URL para listar amigos:', url);
+    console.log('Token enviado:', localStorage.getItem('token'));
+
+    return this.http.get(url, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
   }
 
   listPendingFriendRequests(): Observable<any> {
     const headers = this.authHeaders();
-    return this.http.get(`${this.apiUrl}/friendships/pending`, { headers });
+    const url = `${this.apiUrl}/friendships/pending`;
+    console.log('URL para listar solicitudes pendientes:', url);
+    console.log('Token enviado:', localStorage.getItem('token'));
+
+    return this.http.get(url, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
   }
 
   acceptFriendship(friendshipId: string | number): Observable<any> {
     const headers = this.authHeaders();
-    return this.http.post(
-      `${this.apiUrl}/friendships/${friendshipId}/accept`,
-      {},
-      { headers }
-    );
+    const url = `${this.apiUrl}/friendships/${friendshipId}/accept`;
+    console.log('URL para aceptar solicitud de amistad:', url);
+    console.log('Token enviado:', localStorage.getItem('token'));
+
+    return this.http.post(url, {}, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
   }
 
   // ===============================

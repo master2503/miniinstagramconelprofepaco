@@ -1,39 +1,196 @@
+// Variables para consistencia
+$primary-color: #25008b;
+$text-dark: #262626;
+$text-gray: #8e8e8e;
+$bg-gray: #fafafa;
+$border-radius: 12px;
+
 .feed-container {
-  padding: 10px;
+  padding: 20px;
+  background-color: $bg-gray; // Fondo general suave
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Centra las tarjetas
 }
 
 .post-card {
-  margin-bottom: 20px;
+  background: white;
+  width: 100%;
+  max-width: 470px; // Ancho estándar de feed
+  margin-bottom: 30px;
+  border-radius: $border-radius;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); // Sombra elegante
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: hidden; // Asegura que la imagen respete los bordes redondeados
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px); // Pequeño efecto al pasar el mouse
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  }
 }
 
 .post-image {
   width: 100%;
-  height: auto;
+  height: 500px; // Altura fija para que se vea bien
+  position: relative; 
 
   img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
+    object-fit: cover; // Cubre el contenedor sin distorsionar
   }
 }
 
 .post-actions {
-  padding: 8px 12px;
+  padding: 12px 16px;
+  display: flex; // ¡CRUCIAL! Faltaba esto para alinear
   align-items: center;
+  gap: 16px; // Espacio entre iconos
 
   .like-icon {
-    font-size: 28px;
-    color: #25008b;
+    font-size: 24px; // Tamaño más balanceado
+    color: $text-dark; // Color neutro por defecto
     cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s;
+
+    &:hover {
+      color: $primary-color; // Color al pasar el mouse
+      transform: scale(1.1);
+    }
+    
+    // Estado activo (si usas una clase cuando dan like)
+    &.liked {
+      color: #ed4956; // Rojo estilo corazón
+    }
   }
 }
 
 .likes-text {
-  font-weight: bold;
-  padding: 0 12px;
+  font-weight: 600; // Semi-bold se ve mejor que bold total
+  padding: 0 16px;
+  font-size: 14px;
+  color: $text-dark;
+  margin-bottom: 8px;
+  display: block;
 }
 
 .caption {
-  padding: 0 12px 12px 12px;
-  color: #828282;
+  padding: 0 16px 20px 16px;
+  font-size: 14px;
+  line-height: 1.5; // Mejor legibilidad
+  color: $text-dark;
+
+  // Si quieres que el nombre de usuario sea negrita dentro del caption
+  span.username {
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  
+  // El texto del comentario un poco más suave
+  span.text {
+     color: #4a4a4a;
+  }
+}
+
+// NOMBRE DE USUARIO EN EL POST
+ion-item h2, ion-item h3, ion-label h2, ion-label h3 {
+  color: #222 !important;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+
+// COMENTARIOS
+.comments-section {
+  border-top: 1px solid #e0e0e0;
+  padding: 12px 16px;
+  background-color: #fafafa;
+  
+  .comments-list {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 12px;
+    
+    .no-comments {
+      color: $text-gray;
+      font-size: 13px;
+      padding: 8px 0;
+      text-align: center;
+    }
+    
+    .comment-item {
+      padding: 8px 0;
+      font-size: 13px;
+      line-height: 1.4;
+      color: $text-dark;
+      
+      strong {
+        font-weight: 600;
+        margin-right: 6px;
+      }
+    }
+  }
+  
+  .comment-form {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #e0e0e0;
+    
+    ion-item {
+      padding: 0;
+      --padding-start: 0;
+      --padding-end: 0;
+      --inner-padding-end: 0;
+    }
+    
+    ion-input {
+      font-size: 13px;
+    }
+    
+    ion-button {
+      font-size: 13px;
+      height: 32px;
+    }
+  }
+}
+
+/* Mejorar el modal de ion-alert para subir foto */
+ion-alert.custom-upload-alert {
+  --background: #fff;
+  --max-width: 350px;
+  --min-width: 260px;
+  --border-radius: 16px;
+  --box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+}
+
+ion-alert.custom-upload-alert .alert-head {
+  color: #222;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding-bottom: 8px;
+}
+
+ion-alert.custom-upload-alert .alert-input {
+  background: #f4f4f4;
+  color: #222;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+ion-alert.custom-upload-alert .alert-button {
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 6px;
+  margin: 0 4px;
+  padding: 8px 18px;
+}
+
+ion-alert.custom-upload-alert .alert-button.ion-focused {
+  background: #3897f0;
+  color: #fff;
 }

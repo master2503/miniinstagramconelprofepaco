@@ -14,12 +14,7 @@ export const routes: Routes = [
   },
   {
     path: 'friends',
-    loadComponent: () => import('./pages/friends/friends.page').then( m => m.FriendsPage)
-  },
-
-  {
-  path: 'friends',
-  loadComponent: () => import('./pages/friends/friends.page').then(m => m.FriendsPage)
+    loadComponent: () => import('./pages/friends/friends.page').then( m => m.FriendsPage),
+    canActivate: [authGuard]
   }
-
 ];

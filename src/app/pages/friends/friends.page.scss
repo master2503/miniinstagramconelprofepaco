@@ -1,0 +1,85 @@
+/* Estilo general para la página de amigos */
+ion-content {
+  --background: #f8f9fa;
+  padding: 16px;
+}
+
+/* Encabezado */
+ion-header {
+  --background: #ffffff;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+/* Lista de amigos y solicitudes */
+ion-list {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+}
+
+/* Ítems de la lista */
+ion-item {
+  --background: #ffffff;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 12px;
+}
+
+ion-item:last-child {
+  border-bottom: none;
+}
+
+/* Avatar de usuario */
+ion-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+ion-avatar ion-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Botón de aceptar solicitud */
+ion-button {
+  --background: #3897f0;
+  --color: #ffffff;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+ion-button[fill="outline"] {
+  --background: transparent;
+  --border-color: #3897f0;
+  --color: #3897f0;
+}
+
+/* Estado vacío */
+.empty-state {
+  text-align: center;
+  color: #8e8e8e;
+  font-size: 14px;
+  margin-top: 24px;
+}
+
+.empty-state ion-icon {
+  font-size: 48px;
+  color: #8e8e8e;
+  margin-bottom: 8px;
+}
+
+/* Indicador de carga */
+.loading-state {
+  text-align: center;
+  color: #8e8e8e;
+  font-size: 14px;
+  margin-top: 24px;
+}
+
+.loading-state ion-spinner {
+  margin-bottom: 8px;
+}

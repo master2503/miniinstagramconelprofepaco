@@ -14,12 +14,18 @@ export class FriendsPage implements OnInit {
 
   friends: any[] = [];
   pending: any[] = [];
+  users: any[] = []; // Lista de usuarios para enviar solicitud de amistad
   loading = true;
 
   constructor(private api: ApiService) {}
 
   ngOnInit() {
     this.loadData();
+  }
+
+  handleError(error: any) {
+    console.error('Error en la operación:', error);
+    alert('Ocurrió un error. Por favor, inténtalo nuevamente.');
   }
 
   loadData() {
@@ -30,16 +36,26 @@ export class FriendsPage implements OnInit {
       this.api.listPendingFriendRequests().toPromise()
     ])
     .then(([friends, pending]: any) => {
-      this.friends = friends || [];
-      this.pending = pending || [];
+      this.friends = friends || [];x
     })
+    .catch(error => this.handleError(error))
     .finally(() => this.loading = false);
   }
 
   accept(friendshipId: number) {
     this.api.acceptFriendship(friendshipId).subscribe({
       next: () => this.loadData(),
-      error: err => console.error('Error aceptando amistad', err)
+      error: err => this.handleError(err)
+    });
+  }
+
+  sendRequest(userId: number) {
+    this.api.sendFriendRequest(userId).subscribe({
+      next: () => {
+        alert('Solicitud de amistad enviada');
+        this.loadData();
+      },
+      error: err => this.handleError(err)
     });
   }
 }

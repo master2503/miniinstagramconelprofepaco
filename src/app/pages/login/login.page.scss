@@ -6,7 +6,7 @@
 // --- Variables de Color (Corregidas) ---
 $primary-blue: #1a73e8;     // Azul Vibrante (Usado en botones)
 $accent-red: #ea4335;       // Rojo Intenso (Usado en enlaces de acento)
-$text-color: #262626;       // << CORREGIDO: Texto oscuro para ser visible sobre fondo blanco
+$text-color: #ffffff;       // << CORREGIDO: Texto oscuro para ser visible sobre fondo blanco
 $placeholder-color: #757575; // << CORREGIDO: Gris para subtítulos y placeholders
 $border-color: #c0c0c0;     // Borde más definido
 $background-color: #f7f7f7; // Fondo muy ligero
@@ -29,7 +29,7 @@ $background-color: #f7f7f7; // Fondo muy ligero
 .login-container {
   width: 90%;
   max-width: 350px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
+  box-shadow: 0 10px 30px rgb(254, 254, 254); 
   padding: 40px 20px;
   background: white; // <-- Fondo blanco
   border: 1px solid $border-color;
